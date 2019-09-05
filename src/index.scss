@@ -7,6 +7,40 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+	height: 100%;
+}
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+  flex: 1 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.footer {
+	flex: 0 0 auto;
+}
+
+.self {
+  &__title {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  &__header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #000;
+  }
+  &__content {
+
+  }
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
