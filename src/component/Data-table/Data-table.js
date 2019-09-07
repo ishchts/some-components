@@ -40,17 +40,17 @@ class DataTable extends React.Component {
     isModal: false,
     isValid: false,
     userTemplate: {
-      id: null,
-      firstName: null,
-      lastName: null,
-      email: null,
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
       address: {
-        streetAddress: null,
-        city: null,
-        state: null,
-        zip: null
+        streetAddress: '',
+        city: '',
+        state: '',
+        zip: ''
       },
-      description: null,
+      description: '',
     },
     activePage: 1,
     itemsCountPerPage: 50,
@@ -295,31 +295,31 @@ class DataTable extends React.Component {
     const { userTemplate } = this.state;
     const { address } = this.state.userTemplate;
 
-    if (address.city === null) {
+    if (address.city === '') {
       return false;
     }
-    if (address.state === null) {
+    if (address.state === '') {
       return false;
     }
-    if (address.streetAddress === null) {
+    if (address.streetAddress === '') {
       return false;
     }
-    if (address.zip === null) {
+    if (address.zip === '') {
       return false;
     }
-    if (userTemplate.id === null) {
+    if (userTemplate.id === '') {
       return false;
     }
-    if (userTemplate.description === null) {
+    if (userTemplate.description === '') {
       return false;
     }
-    if (userTemplate.email === null) {
+    if (userTemplate.email === '') {
       return false;
     }
-    if (userTemplate.firstName === null) {
+    if (userTemplate.firstName === '') {
       return false;
     }
-    if (userTemplate.lastName === null) {
+    if (userTemplate.lastName === '') {
       return false;
     }
     return true;
@@ -361,7 +361,7 @@ class DataTable extends React.Component {
   }
 
   render() {
-    const { data, copyData, itemsCountPerPage, loader, firstVisit } = this.state;
+    const { data, copyData, itemsCountPerPage, loader, firstVisit, selectedUsers } = this.state;
     const chunkData = _.chunk(data, itemsCountPerPage);
 
     if (firstVisit) {
@@ -394,15 +394,15 @@ class DataTable extends React.Component {
           <div className="users__side">
 
             {
-              this.state.selectedUsers.length > 0 ?
-                this.state.selectedUsers.map((el, i) => (
+              selectedUsers.length > 0 ?
+                selectedUsers.map((el, i) => (
                   <div key={i} onClick={this.removeSelectUser} className="selectedUser">
                     <div className="selectedUser__group">
                       Выбран пользователь <b>{el.firstName}</b>
                     </div>
                     <div className="selectedUser__group">
                       <div>Описание:</div>
-                      <textarea defaultValue={el.description} readOnly></textarea>
+                      <textarea value={el.description} readOnly></textarea>
                     </div>
                     <div className="selectedUser__group">
                       Адрес проживания: <b>{el.address.streetAddress}</b>
@@ -438,42 +438,46 @@ class DataTable extends React.Component {
                     }>ID {this.arrowIcon()}
                     </button>
                     </th>
-                  <th><button type="button" onClick={this.sortHandler('firstName')} className={
-                    this.state.sortedBy['firstName'].selected ?
-                      this.state.sortedBy['firstName'].selected && !this.state.sortedBy['firstName'].inc ?
-                        'active up'
-                          :
-                            'active'
-                              :
-                                null
-                    }>firstName {this.arrowIcon()}</button></th>
-                  <th><button type="button" onClick={this.sortHandler('lastName')} className={
-                    this.state.sortedBy['lastName'].selected ?
-                      this.state.sortedBy['lastName'].selected && !this.state.sortedBy['lastName'].inc ?
-                        'active up'
-                          :
-                            'active'
-                              :
-                                null
-                    }>lastName {this.arrowIcon()}</button></th>
-                  <th><button type="button" onClick={this.sortHandler('email')} className={
-                    this.state.sortedBy['email'].selected ?
-                      this.state.sortedBy['email'].selected && !this.state.sortedBy['email'].inc ?
-                        'active up'
-                          :
-                            'active'
-                              :
-                                null
-                    }>email {this.arrowIcon()}</button></th>
-                  <th><button type="button" onClick={this.sortHandler('phone')} className={
-                    this.state.sortedBy['phone'].selected ?
-                      this.state.sortedBy['phone'].selected && !this.state.sortedBy['phone'].inc ?
-                        'active up'
-                          :
-                            'active'
-                              :
-                                null
-                    }>phone {this.arrowIcon()}</button></th>
+                    <th><button type="button" onClick={this.sortHandler('firstName')} className={
+                      this.state.sortedBy['firstName'].selected ?
+                        this.state.sortedBy['firstName'].selected && !this.state.sortedBy['firstName'].inc ?
+                          'active up'
+                            :
+                              'active'
+                                :
+                                  null
+                      }>firstName {this.arrowIcon()}</button>
+                    </th>
+                    <th><button type="button" onClick={this.sortHandler('lastName')} className={
+                      this.state.sortedBy['lastName'].selected ?
+                        this.state.sortedBy['lastName'].selected && !this.state.sortedBy['lastName'].inc ?
+                          'active up'
+                            :
+                              'active'
+                                :
+                                  null
+                      }>lastName {this.arrowIcon()}</button>
+                    </th>
+                    <th><button type="button" onClick={this.sortHandler('email')} className={
+                      this.state.sortedBy['email'].selected ?
+                        this.state.sortedBy['email'].selected && !this.state.sortedBy['email'].inc ?
+                          'active up'
+                            :
+                              'active'
+                                :
+                                  null
+                      }>email {this.arrowIcon()}</button>
+                    </th>
+                    <th><button type="button" onClick={this.sortHandler('phone')} className={
+                      this.state.sortedBy['phone'].selected ?
+                        this.state.sortedBy['phone'].selected && !this.state.sortedBy['phone'].inc ?
+                          'active up'
+                            :
+                              'active'
+                                :
+                                  null
+                      }>phone {this.arrowIcon()}</button>
+                    </th>
                 </tr>
               </thead>
               <tbody>
@@ -517,43 +521,43 @@ class DataTable extends React.Component {
                   <fieldset className="fieldset">
                     <label>
                       id 
-                      <input type="number" name="id" onChange={this.handlerAddField('id')} value={this.state.userTemplate.id ? this.state.userTemplate.id : ''}/>
+                      <input type="number" name="id" onChange={this.handlerAddField('id')} value={this.state.userTemplate.id}/>
                     </label>
                     <label>
                       firstName 
-                      <input type="text" name="firstName" onChange={this.handlerAddField('firstName')} value={this.state.userTemplate.firstName ? this.state.userTemplate.firstName : ''}/>
+                      <input type="text" name="firstName" onChange={this.handlerAddField('firstName')} value={this.state.userTemplate.firstName}/>
                     </label>
                     <label>
                       lastName 
-                      <input type="text" name="lastName" onChange={this.handlerAddField('lastName')} value={this.state.userTemplate.lastName ? this.state.userTemplate.lastName : ''}/>
+                      <input type="text" name="lastName" onChange={this.handlerAddField('lastName')} value={this.state.userTemplate.lastName}/>
                     </label>
                     <label>
                       email 
-                      <input type="text" name="email" onChange={this.handlerAddField('email')} value={this.state.userTemplate.email ? this.state.userTemplate.email : ''}/>
+                      <input type="text" name="email" onChange={this.handlerAddField('email')} value={this.state.userTemplate.email}/>
                     </label>
                     <label>
                       phone 
-                      <input type="text" name="phone" onChange={this.handlerAddField('phone')} value={this.state.userTemplate.phone ? this.state.userTemplate.phone : ''}/>
+                      <input type="text" name="phone" onChange={this.handlerAddField('phone')} value={this.state.userTemplate.phone}/>
                     </label>
                     <label>
                       streetAddress
-                      <input type="text" name="streetAddress" onChange={this.handlerAddAdressField('streetAddress')} value={this.state.userTemplate.address.streetAddress ? this.state.userTemplate.address.streetAddress : ''}/>
+                      <input type="text" name="streetAddress" onChange={this.handlerAddAdressField('streetAddress')} value={this.state.userTemplate.address.streetAddress}/>
                     </label>
                     <label>
                       city
-                      <input type="text" name="city" onChange={this.handlerAddAdressField('city')} value={this.state.userTemplate.address.city ? this.state.userTemplate.address.city : ''}/>
+                      <input type="text" name="city" onChange={this.handlerAddAdressField('city')} value={this.state.userTemplate.address.city}/>
                     </label>
                     <label>
                       state
-                      <input type="text" name="state" onChange={this.handlerAddAdressField('state')} value={this.state.userTemplate.address.state ? this.state.userTemplate.address.state : ''}/>
+                      <input type="text" name="state" onChange={this.handlerAddAdressField('state')} value={this.state.userTemplate.address.state}/>
                     </label>
                     <label>
                       zip
-                      <input type="text" name="zip" onChange={this.handlerAddAdressField('zip')} value={this.state.userTemplate.address.zip ? this.state.userTemplate.address.zip : ''}/>
+                      <input type="text" name="zip" onChange={this.handlerAddAdressField('zip')} value={this.state.userTemplate.address.zip}/>
                     </label>
                     <label>
                       description
-                      <input type="text" name="description" onChange={this.handlerAddField('description')} value={this.state.userTemplate.description ? this.state.userTemplate.description : ''}/>
+                      <input type="text" name="description" onChange={this.handlerAddField('description')} value={this.state.userTemplate.description}/>
                     </label>
                   </fieldset>
                   <div className="modal__buttons">

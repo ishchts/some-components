@@ -1,7 +1,7 @@
 import React from 'react';
 import _one from './images/1.png';
 import './style.scss';
-import { Route, Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Self = () => {
   return (
@@ -33,6 +33,15 @@ const Self = () => {
                     <li className="list__item">После заполнения всех инпутов активируется кнопка Добавить в таблицу которая вставляет заполненный ряд в начало таблицы</li>
                   </ul>
                 </div>
+              </div>
+            </div>
+          </NavLink>
+          <NavLink to="/Basket" className="self__item selfItem">
+            <div className="selfItem__contains">
+              <div className="selfItem__content">
+                <span className="selfItem__name">
+                  basket
+                </span>
               </div>
             </div>
           </NavLink>

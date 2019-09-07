@@ -1,0 +1,44 @@
+.basket {
+  &__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 29px;
+  }
+  &__head {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  &__title {
+    display: none;
+  }
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 211px;
+    padding-right: 211px;
+  }
+  &__colName {
+    margin-right: 285px;
+  }
+  &__colPrice {
+    margin-right: 116px;
+  }
+  &__colNumber {
+    margin-right: 77px;
+  }
+  &__colSumm {
+
+  }
+  &__clearBtn {
+    right: 16px;
+    top: 5px;
+    position: absolute;
+    color: #575663;
+  }
+}
+
+.box {
+  border: 1px solid;
+  margin-bottom: 20px;
+  padding: 20px;
+}
