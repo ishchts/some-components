@@ -1,7 +1,8 @@
 import React from 'react';
 import _one from './images/1.png';
+import _two from './images/2.png';
 import './style.scss';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Self = () => {
   return (
@@ -38,13 +39,49 @@ const Self = () => {
           </NavLink>
           <NavLink to="/Basket" className="self__item selfItem">
             <div className="selfItem__contains">
+              <figure className="selfItem__figure">
+                <img className="selfItem__image" src={_two} alt="Submit" />
+              </figure>
               <div className="selfItem__content">
                 <span className="selfItem__name">
-                  basket
+                  Корзина
                 </span>
+                <div className="selfItem__desc">
+                  <p className="selfItem__descCaption">
+                    Функционал
+                  </p>
+                  <ul className="selfItem__list list">
+                    <li className="list__item">увеличение/уменьшение</li>
+                    <li className="list__item">Удаление товара</li>
+                    <li className="list__item">Очистка корзины</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </NavLink>
+
+          <a href="https://ainterrogation-app.firebaseapp.com/" target="_blank">
+            <div className="selfItem__contains">
+              {/* <figure className="selfItem__figure">
+                <img className="selfItem__image" src={_two} alt="Submit" />
+              </figure> */}
+              <div className="selfItem__content">
+                <span className="selfItem__name">
+                  Тесты
+                </span>
+                <div className="selfItem__desc">
+                  <p className="selfItem__descCaption">
+                    Функционал
+                  </p>
+                  <ul className="selfItem__list list">
+                    <li className="list__item">Список тестов</li>
+                    <li className="list__item">Создание теста</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </a>
+          
         </div>
 
       </div>

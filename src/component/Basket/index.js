@@ -5,7 +5,8 @@ import Item from './Item';
 import Header from './Header';
 import Checkout from './Checkout';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import data from './../../data/basket'
+import data from './../../data/basket';
+
 
 class BasketApp extends React.Component {
 	constructor(props) {
@@ -275,8 +276,8 @@ class BasketApp extends React.Component {
 						<div className="basket__list">
 							{this.renderItems()}
 						</div>
+						<Checkout data={this.state.badge} />
 					</div>
-					<Checkout data={this.state.badge} />
 				</section>
 			</form>
 		)
@@ -284,10 +285,3 @@ class BasketApp extends React.Component {
 	}
 }
 export default BasketApp;
-/*
-
-if (document.getElementById('basket') !== null) {
-	ReactDOM.render(<BasketApp />, document.getElementById('basket'));
-}
-
-*/

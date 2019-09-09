@@ -1,5 +1,10 @@
 import React from "react";
 import classnames from 'classnames';
+import _one from '../../images/basket/62-536x354.jpg';
+import _two from '../../images/basket/542-536x354.jpg';
+import _three from '../../images/basket/926-536x354.jpg';
+
+const arImages = [_one, _two, _three];
 
 const Item = ({ data, events = {} }) => {
 	const { handleBlur, dec, inc, handleChange, removeItem } = events;
@@ -32,7 +37,7 @@ const Item = ({ data, events = {} }) => {
 		      <div className="box__prewiev">
 						<a href={DETAIL_PAGE_URL} className="box__figure">
 		          <img 
-							src={DETAIL_PICTURE_SRC ? DETAIL_PICTURE_SRC : 'include/No_photo.svg'}
+							src={arImages[Math.floor(Math.random() * arImages.length)]}
 							alt={NAME}
 		          className="box__image" />
 		         </a>
@@ -75,7 +80,7 @@ const Item = ({ data, events = {} }) => {
 								<span className="box__price">
 									{
 										// BX.util.number_format(DISCOUNT_PRICE > 0 ? FULL_PRICE - DISCOUNT_PRICE : FULL_PRICE, 2, '.', " ") + ' р'
-										DISCOUNT_PRICE > 0 ? FULL_PRICE - DISCOUNT_PRICE : FULL_PRICE
+										DISCOUNT_PRICE > 0 ? Number(FULL_PRICE - DISCOUNT_PRICE).toFixed(2) : Number(FULL_PRICE).toFixed(2)
 									}
 								</span>
 		         </div>

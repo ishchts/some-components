@@ -7,47 +7,43 @@ const declOfNum = (n, titles) => {
 const Checkout = ({ data: { count, sumNumber, discount} }) => {
   return (
     <div className="checkoutOrder">
-      <div className="checkoutOrder__container">
-        <div className="checkoutOrder__item">
-          <ul className="checkoutOrder__list">
-            <li className="checkoutOrder__listItem">
-              <span className="checkoutOrder__listKey">
-                <span className="js-countItem">{count} {declOfNum(count, ['товар', 'товара', 'товаров'])} </span>
-                на сумму
-									</span>
-              <span className="checkoutOrder__listValue js-basketSum">
-                <span className="checkoutOrder__price">
-                  {/* { BX.util.number_format(discount > 0 ? sumNumber + discount : sumNumber, 2, '.', " ") + ' р' } */}
-                  { discount > 0 ? sumNumber + discount : sumNumber }
+      <ul className="checkoutOrder__list">
+        <li className="checkoutOrder__item">
+          <span className="checkoutOrder__itemKey">
+            <span className="js-countItem">{count} {declOfNum(count, ['товар', 'товара', 'товаров'])} </span>
+            на сумму
+              </span>
+          <span className="checkoutOrder__itemValue js-basketSum">
+            <span className="checkoutOrder__price">
+              {/* { BX.util.number_format(discount > 0 ? sumNumber + discount : sumNumber, 2, '.', " ") + ' р' } */}
+              { discount > 0 ? sumNumber + discount : sumNumber }
+            </span>
+          </span>
+        </li>
+        {
+          discount > 0 ?
+            <li className="checkoutOrder__item checkoutOrder__item--discount">
+              <span className="checkoutOrder__itemKey">Скидка</span>
+              <span className="checkoutOrder__itemValue">
+                <span className="checkoutOrder__oldPrice">
+                  {/* {BX.util.number_format(discount, 2, '.', " ") + ' р'} */}
+                  {discount}
                 </span>
               </span>
             </li>
-            {
-              discount > 0 ?
-                <li className="checkoutOrder__listItem checkoutOrder__listItem--discount">
-                  <span className="checkoutOrder__listKey">Скидка</span>
-                  <span className="checkoutOrder__listValue">
-                    <span className="checkoutOrder__oldPrice">
-                      {/* {BX.util.number_format(discount, 2, '.', " ") + ' р'} */}
-                      {discount}
-                    </span>
-                  </span>
-                </li>
-                : null
-            }
-          </ul>
-          <div className="checkoutOrder__total">
-            <span className="checkoutOrder__totalText">К оплате:</span>
-            <span className="checkoutOrder__totalPrice js-basketSumResult">
-              {/* {BX.util.number_format(sumNumber, 2, '.', " ") + ' р'} */}
-              {sumNumber}
-            </span>
-          </div>
-          <div className="checkoutOrder__warning">
-          </div>
-          <button className="checkoutOrder__button js-BtnBasketOK" type="submit">Оформить заказ</button>
-        </div>
+            : null
+        }
+      </ul>
+      <div className="checkoutOrder__total">
+        <span className="checkoutOrder__totalText">К оплате:</span>
+        <span className="checkoutOrder__totalPrice js-basketSumResult">
+          {/* {BX.util.number_format(sumNumber, 2, '.', " ") + ' р'} */}
+          {sumNumber}
+        </span>
       </div>
+      <div className="checkoutOrder__warning">
+      </div>
+      <button className="checkoutOrder__button js-BtnBasketOK" type="submit">Оформить заказ</button>
     </div>
   )
 }
