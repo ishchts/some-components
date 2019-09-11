@@ -1,0 +1,109 @@
+#mustistepform {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.userFrom {
+  position: relative;
+  padding-bottom: 100px;
+  min-height: 500px;
+  width: 800px;
+  box-shadow: 0px 12px 57px 0px rgba(0, 0, 0, 0.1);
+  &__title {
+    background-color: #1976d2;
+    color: #fff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+  }
+  &__content {
+    padding: 20px;
+  }
+  &__buttons {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+  }
+}
+
+.textField {
+  margin-bottom: 20px;
+  &__legend {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #888;
+    font-family: Spectral;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  &__label {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-top: 20px;
+  }
+  &__input {
+    border: none;
+    border-bottom: 1px solid #888;
+    color: #888;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: color 0.3s linear;
+    &:focus {
+      border-color: #1976d2;
+      &::placeholder {
+        opacity: 0;
+      }
+      + .textField__legend {
+        color: #1976d2
+      }
+    }
+  }
+}
+
+.confirmList {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.confirmItem {
+  margin-bottom: 15px;
+  &__caption {
+    margin-bottom: 15px;
+    color: #888;
+    font-family: Spectal;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  &__value {
+
+  }
+}
+
+.button {
+  position: relative;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px;
+  margin: 0 5px;
+  width: 110px;
+  &--second {
+    color: #000;
+    background-color: transparent;
+    box-shadow: 0px 2px 10px 1px #97B1BF;
+  }
+  &--primary {
+    color: #fff;
+    background-color: #1976d2;
+  }
+}
