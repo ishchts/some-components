@@ -37,12 +37,7 @@ class BasketApp extends React.Component {
 	}
 
 	clearBasket = () => {
-
-		const { items } = this.state;
-
-		const self = this;
-		self.setState({ isEmpty: true, items: {} })
-
+		this.setState({ isEmpty: true, items: {} })
 	}
 
 	handleChange = id => e => {
@@ -50,91 +45,75 @@ class BasketApp extends React.Component {
 	}
 
 	handleBlur = id => e => {
-		const self = this;
-		// const prepareData = [
-		// 	{ name: 'via_ajax', value: 'Y' },
-		// 	{ name: 'SITE_ID', value: "s1" },
-		// 	{ name: 'sessid', value: BX.bitrix_sessid() },
-		// 	{ name: 'signedParamsString', value: signedParams },
-		// 	{ name: 'basketAction', value: 'recalculateAjax' },
-		// 	{ name: 'basket[' + e.target.name + ']', value: e.target.value },
-		// ];
 
-		const minValue = e.target.value === '' ? 1 : false;
+		const minValue = e.target.value === '' || e.target.value <= 0 ? 1 : e.target.value;
 
-		if (minValue) {
-			this.setState({ items: { ...this.state.items, [id]: { ...this.state.items[id], QUANTITY: minValue } } })
-		}
+		const countItems = Object.keys(this.state.items).reduce((acc, el) => {
+			return acc + parseInt(this.state.items[el].QUANTITY, 10);
+		}, 0);
+	
+		const summItems = Object.keys(this.state.items).reduce((acc, el) => {
+			if (el === id) {
+				return acc;
+			}
+			return acc + parseInt(this.state.items[el].PRICE, 10);
+		}, 0);
 
-		// $.ajax({
-		// 	type: 'post',
-		// 	data: prepareData,
-		// 	url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-		// 	success: function (response) {
+		
+		const newItemPrice = (this.state.items[id].FULL_PRICE - this.state.items[id].DISCOUNT_PRICE) * minValue;
 
-		// 		self.setState({
-		// 			items: { ...response.BASKET_DATA.GRID.ROWS },
-		// 			badge: {
-		// 				...self.state.badge,
-		// 				count: response.BASKET_DATA.BASKET_ITEMS_COUNT,
-		// 				sum: response.BASKET_DATA.allSum_FORMATED,
-		// 				sumNumber: response.BASKET_DATA.allSum,
-		// 				discount: response.BASKET_DATA.DISCOUNT_PRICE_ALL,
-		// 			}
-		// 		})
-		// 	}
-		// });
+		this.setState({
+			items: {
+				...this.state.items,
+				[id]: {
+					...this.state.items[id],
+					QUANTITY: minValue,
+				}
+			},
+			badge: {
+				...this.state.badge,
+				count: countItems,
+				sumNumber: summItems + newItemPrice,
+			}
+		});
 
-	}
-
-	updateValue = (target, name, newCount) => {
-		const self = this;
-
-		// const prepareData = [
-		// 	{ name: 'via_ajax', value: 'Y' },
-		// 	{ name: 'SITE_ID', value: this.siteId },
-		// 	{ name: 'sessid', value: BX.bitrix_sessid() },
-		// 	{ name: 'signedParamsString', value: signedParams },
-		// 	{ name: 'basketAction', value: 'recalculateAjax' },
-		// 	{ name: 'basket[' + name + ']', value: newCount }
-		// ];
-
-		// $.ajax({
-		// 	type: 'post',
-		// 	data: prepareData,
-		// 	url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-		// 	success: function (response) {
-		// 		self.setState({
-		// 			items: { ...response.BASKET_DATA.GRID.ROWS },
-		// 			badge: {
-		// 				...self.state.badge, count: response.BASKET_DATA.BASKET_ITEMS_COUNT,
-		// 				sum: response.BASKET_DATA.allSum_FORMATED,
-		// 				sumNumber: response.BASKET_DATA.allSum,
-		// 				discount: response.BASKET_DATA.DISCOUNT_PRICE_ALL,
-		// 			}
-		// 		});
-		// 	}
-		// });
 	}
 
 	dec = (id, name) => e => {
 		const { QUANTITY: count } = this.state.items[id];
 		const newCount = count - 1 <= 0 ? 1 : count - 1;
 
-		this.setState({ items: { ...this.state.items, [id]: { ...this.state.items[id], QUANTITY: newCount } } });
+		this.setState({
+			items: {
+				...this.state.items,
+				[id]: { ...this.state.items[id], QUANTITY: newCount }
+			},
+			badge: {
+				...this.state.badge,
+				count: newCount > 1 ? this.state.badge.count - 1 : this.state.badge.count,
+				sumNumber: newCount > 1 ? this.state.badge.sumNumber - this.state.items[id].PRICE : this.state.badge.sumNumber,
+				discount: newCount > 1 ? this.state.badge.discount - this.state.items[id].DISCOUNT_PRICE : this.state.badge.discount,
+			}
+		});
 
-		const target = e.target;
-		// this.updateValue(target, name, newCount);
 	}
 
 	inc = (id, name) => e => {
 		const { QUANTITY: count } = this.state.items[id];
 		const newCount = Number(count) + 1;
 
-		this.setState({ items: { ...this.state.items, [id]: { ...this.state.items[id], QUANTITY: newCount } } });
-
-		const target = e.target;
-		this.updateValue(target, name, newCount);
+		this.setState({
+			items: {
+				...this.state.items,
+				[id]: { ...this.state.items[id], QUANTITY: newCount }
+			},
+			badge: {
+				...this.state.badge,
+				count: this.state.badge.count + 1,
+				sumNumber: this.state.badge.sumNumber + this.state.items[id].PRICE,
+				discount: this.state.badge.discount + this.state.items[id].DISCOUNT_PRICE
+			}
+		});
 
 	}
 

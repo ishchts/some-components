@@ -16,7 +16,7 @@ const Checkout = ({ data: { count, sumNumber, discount} }) => {
           <span className="checkoutOrder__itemValue js-basketSum">
             <span className="checkoutOrder__price">
               {/* { BX.util.number_format(discount > 0 ? sumNumber + discount : sumNumber, 2, '.', " ") + ' р' } */}
-              { discount > 0 ? sumNumber + discount : sumNumber }
+              {discount > 0 ? Number(sumNumber + discount).toFixed(2) : sumNumber.toFixed(2) }
             </span>
           </span>
         </li>
@@ -27,7 +27,7 @@ const Checkout = ({ data: { count, sumNumber, discount} }) => {
               <span className="checkoutOrder__itemValue">
                 <span className="checkoutOrder__oldPrice">
                   {/* {BX.util.number_format(discount, 2, '.', " ") + ' р'} */}
-                  {discount}
+                  {discount.toFixed(2)}
                 </span>
               </span>
             </li>
@@ -38,7 +38,7 @@ const Checkout = ({ data: { count, sumNumber, discount} }) => {
         <span className="checkoutOrder__totalText">К оплате:</span>
         <span className="checkoutOrder__totalPrice js-basketSumResult">
           {/* {BX.util.number_format(sumNumber, 2, '.', " ") + ' р'} */}
-          {sumNumber}
+          {sumNumber.toFixed(2)}
         </span>
       </div>
       <div className="checkoutOrder__warning">
