@@ -14,79 +14,34 @@ class BasketApp extends React.Component {
 		this.state = {};
 	}
 
-	removeItem = (id) => {
-		const self = this;
+	removeItem = (id) => e => {
 
 		const { items, badge } = this.state;
 		const itemPrice = items[id].PRICE;
-		delete items[id];
+		const newItems = Object.keys(items).reduce((acc, el) => {
+			if (el === id) {
+				return {...acc}
+			}
+			return { ...acc, [el]: items[el] }
+		}, {});
 
 		this.setState({
-			items,
-			isEmpty: Object.keys(items).length === 0 ? true : false,
+			items: newItems,
+			isEmpty: Object.keys(newItems).length === 0 ? true : false,
 			badge: {
-				count: Object.keys(items).length,
+				count: Object.keys(newItems).length,
 				sumNumber: Math.floor(badge.sumNumber - itemPrice),
 				sum: Math.floor(badge.sumNumber - itemPrice),
 			}
-		// 			badge: {
-		// 				count: response.BASKET_DATA.BASKET_ITEMS_COUNT,
-		// 				sum: response.BASKET_DATA.allSum_FORMATED,
-		// 				sumNumber: response.BASKET_DATA.allSum,
-		// 			},
 		})
-		// const prepareData = [
-		// 	{ name: 'via_ajax', value: 'Y' },
-		// 	{ name: 'SITE_ID', value: "s1" },
-		// 	{ name: 'sessid', value: BX.bitrix_sessid() },
-		// 	{ name: 'signedParamsString', value: signedParams },
-		// 	{ name: 'basketAction', value: 'recalculateAjax' },
-		// 	{ name: `basket[DELETE_${id}]`, value: 'Y' },
-		// ];
-
-		// $.ajax({
-		// 	type: 'POST',
-		// 	data: prepareData,
-		// 	url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-		// 	success: function (response) {
-		// 		self.setState({
-		// 			items: { ...response.BASKET_DATA.GRID.ROWS },
-		// 			isEmpty: response.BASKET_DATA.EMPTY_BASKET,
-		// 			badge: {
-		// 				count: response.BASKET_DATA.BASKET_ITEMS_COUNT,
-		// 				sum: response.BASKET_DATA.allSum_FORMATED,
-		// 				sumNumber: response.BASKET_DATA.allSum,
-		// 			},
-		// 		});
-		// 	}
-		// })
-
 	}
 
 	clearBasket = () => {
-		// const prepareData = [
-		// 	{ name: 'via_ajax', value: 'Y' },
-		// 	{ name: 'SITE_ID', value: "s1" },
-		// 	{ name: 'sessid', value: BX.bitrix_sessid() },
-		// 	{ name: 'signedParamsString', value: signedParams },
-		// 	{ name: 'basketAction', value: 'recalculateAjax' },
-		// ];
+
 		const { items } = this.state;
-		// const newData = Object.keys(items).reduce((acc, el) => {
-		// 	return [...acc, { name: `basket[DELETE_${items[el].ID}]`, value: 'Y' }];
-		// }, prepareData);
 
 		const self = this;
-		self.setState({ isEmpty: true })
-
-		// $.ajax({
-		// 	type: 'POST',
-		// 	data: newData,
-		// 	url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-		// 	success: function (response) {
-		// 		self.setState({ isEmpty: response.BASKET_DATA.EMPTY_BASKET })
-		// 	}
-		// })
+		self.setState({ isEmpty: true, items: {} })
 
 	}
 
@@ -185,32 +140,7 @@ class BasketApp extends React.Component {
 
 	componentDidMount() {
 		const self = this;
-		// const postData = {
-		// 	'via_ajax': 'Y',
-		// 	'sessid': BX.bitrix_sessid(),
-		// 	'site_id': BX.message('SITE_ID'),
-		// 	'basketAction': 'recalculateAjax',
-		// 	'signedParamsString': signedParams
-		// };
 
-		// BX.ajax({
-		// 	url: '/bitrix/components/bitrix/sale.basket.basket/ajax.php',
-		// 	method: 'POST',
-		// 	data: postData,
-		// 	dataType: 'json',
-		// 	onsuccess: function (response) {
-		// 		self.setState({
-		// 			items: response.BASKET_DATA.GRID.ROWS,
-		// 			badge: {
-		// 				count: response.BASKET_DATA.BASKET_ITEMS_COUNT,
-		// 				sum: response.BASKET_DATA.allSum_FORMATED,
-		// 				sumNumber: response.BASKET_DATA.allSum,
-		// 				discount: response.BASKET_DATA.DISCOUNT_PRICE_ALL,
-		// 			},
-		// 			isEmpty: response.BASKET_DATA.EMPTY_BASKET
-		// 		})
-		// 	}
-		// });
 		const response = data;
 		self.setState({
 			items: response.BASKET_DATA.GRID.ROWS,
@@ -233,7 +163,7 @@ class BasketApp extends React.Component {
 			>
 				{
 					Object.keys(items).map((el) => (
-						<CSSTransition key={items[el].ID} classNames="simple-item" timeout={5000}>
+						<CSSTransition key={items[el].ID} classNames="simple-item" timeout={1000}>
 							<Item key={items[el].ID} data={items[el]}
 								events={
 									{

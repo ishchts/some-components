@@ -117,7 +117,7 @@ const Item = ({ data, events = {} }) => {
 									{SUM}
 		            </span>
 		         </div>
-						<a href="javascript:void(0);" className="box__removeLink " data-id={ID} onClick={() => removeItem(ID) }>Удалить</a>
+						<a href="javascript:void(0);" className="box__removeLink " data-id={ID} onClick={ removeItem(ID) }>Удалить</a>
 		      </div>
 		   </div>
 		</article>
