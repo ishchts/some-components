@@ -18,6 +18,7 @@ class BasketApp extends React.Component {
 
 		const { items, badge } = this.state;
 		const itemPrice = items[id].PRICE;
+		const itemQuantity = items[id].QUANTITY;
 		const newItems = Object.keys(items).reduce((acc, el) => {
 			if (el === id) {
 				return {...acc}
@@ -29,9 +30,10 @@ class BasketApp extends React.Component {
 			items: newItems,
 			isEmpty: Object.keys(newItems).length === 0 ? true : false,
 			badge: {
+				...this.state.badge,
 				count: Object.keys(newItems).length,
-				sumNumber: Math.floor(badge.sumNumber - itemPrice),
-				sum: Math.floor(badge.sumNumber - itemPrice),
+				sumNumber: Math.floor(badge.sumNumber - itemPrice * itemQuantity),
+				sum: Math.floor(badge.sumNumber - itemPrice * itemQuantity),
 			}
 		})
 	}
