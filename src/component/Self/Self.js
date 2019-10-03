@@ -1,6 +1,7 @@
 import React from 'react';
 import _one from './images/1.png';
 import _two from './images/2.png';
+import _testPrewiev from './images/test-prewiev.png';
 import './style.scss';
 import { NavLink, Link } from "react-router-dom";
 
@@ -59,32 +60,11 @@ const Self = () => {
               </div>
             </div>
           </NavLink>
-          <NavLink to="/Multistepform" className="self__item selfItem">
+          <a class="self__item selfItem" href="https://ainterrogation-app.firebaseapp.com/" target="_blank">
             <div className="selfItem__contains">
               <figure className="selfItem__figure">
-                <img className="selfItem__image" src={_two} alt="Submit" />
+                <img className="selfItem__image" src={_testPrewiev} alt="Submit" />
               </figure>
-              <div className="selfItem__content">
-                <span className="selfItem__name">
-                  Многошаговая форма
-                </span>
-                <div className="selfItem__desc">
-                  <p className="selfItem__descCaption">
-                    Функционал
-                  </p>
-                  <ul className="selfItem__list list">
-                    <li className="list__item">Валидация</li>
-                    <li className="list__item">Изменение количества</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </NavLink>
-          <a href="https://ainterrogation-app.firebaseapp.com/" target="_blank">
-            <div className="selfItem__contains">
-              {/* <figure className="selfItem__figure">
-                <img className="selfItem__image" src={_two} alt="Submit" />
-              </figure> */}
               <div className="selfItem__content">
                 <span className="selfItem__name">
                   Тесты
