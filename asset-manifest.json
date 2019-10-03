@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/some-components/static/css/main.8cd02ab8.chunk.css",
-    "main.js": "/some-components/static/js/main.09059e22.chunk.js",
-    "main.js.map": "/some-components/static/js/main.09059e22.chunk.js.map",
+    "main.css": "/some-components/static/css/main.a518eab7.chunk.css",
+    "main.js": "/some-components/static/js/main.c926a930.chunk.js",
+    "main.js.map": "/some-components/static/js/main.c926a930.chunk.js.map",
     "runtime~main.js": "/some-components/static/js/runtime~main.a50f5c16.js",
     "runtime~main.js.map": "/some-components/static/js/runtime~main.a50f5c16.js.map",
-    "static/js/2.5d823611.chunk.js": "/some-components/static/js/2.5d823611.chunk.js",
-    "static/js/2.5d823611.chunk.js.map": "/some-components/static/js/2.5d823611.chunk.js.map",
+    "static/js/2.954e52ed.chunk.js": "/some-components/static/js/2.954e52ed.chunk.js",
+    "static/js/2.954e52ed.chunk.js.map": "/some-components/static/js/2.954e52ed.chunk.js.map",
     "index.html": "/some-components/index.html",
-    "precache-manifest.a26ff2cad8fc4a36d098b5c2d211c04a.js": "/some-components/precache-manifest.a26ff2cad8fc4a36d098b5c2d211c04a.js",
+    "precache-manifest.5ce4695182886c5cb8ba094ae79b60c3.js": "/some-components/precache-manifest.5ce4695182886c5cb8ba094ae79b60c3.js",
     "service-worker.js": "/some-components/service-worker.js",
-    "static/css/main.8cd02ab8.chunk.css.map": "/some-components/static/css/main.8cd02ab8.chunk.css.map",
+    "static/css/main.a518eab7.chunk.css.map": "/some-components/static/css/main.a518eab7.chunk.css.map",
     "static/media/1.png": "/some-components/static/media/1.06376fa8.png",
     "static/media/2.png": "/some-components/static/media/2.eee76831.png",
     "static/media/542-536x354.jpg": "/some-components/static/media/542-536x354.a00010a7.jpg",
-    "static/media/62-536x354.jpg": "/some-components/static/media/62-536x354.b0b6fb5f.jpg"
+    "static/media/62-536x354.jpg": "/some-components/static/media/62-536x354.b0b6fb5f.jpg",
+    "static/media/test-prewiev.png": "/some-components/static/media/test-prewiev.ab566cd7.png"
   }
 }
